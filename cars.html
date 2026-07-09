@@ -35,25 +35,35 @@
     .car-badge{display:inline-flex;align-items:center;gap:.5rem;background:var(--ml);color:#fff;padding:.35rem 1rem;border-radius:3px;font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.12em;margin-bottom:1rem}
     .car-hero h1{font-size:clamp(2rem,4vw,3.2rem);font-weight:900;text-transform:uppercase;line-height:1.05;margin-bottom:.5rem}
     .car-hero-sub{font-size:1.1rem;color:rgba(255,255,255,.6);margin-bottom:1.5rem}
-    .car-price-tag{display:inline-block;font-size:clamp(2rem,4vw,3rem);font-weight:900;color:var(--w);background:rgba(196,30,36,.15);border:1px solid rgba(196,30,36,.3);padding:.5rem 1.5rem;border-radius:4px}
+    .car-price-tag{position:relative;display:inline-block;font-size:clamp(2rem,4vw,3rem);font-weight:900;color:var(--w);background:rgba(196,30,36,.15);border:1px solid rgba(196,30,36,.3);padding:.5rem 1.5rem;border-radius:2px;transform:rotate(-2deg)}
+    .car-price-tag::before{content:'';position:absolute;top:-7px;left:16px;width:9px;height:9px;border-radius:50%;background:var(--bl);border:2px solid rgba(255,255,255,.5)}
     .car-section{padding:4rem 1.5rem}
     .car-section-in{max-width:1200px;margin:0 auto}
     .car-grid{display:grid;grid-template-columns:1.4fr 1fr;gap:3rem;align-items:start}
+    .car-grid>*{min-width:0}
     .car-gallery{position:relative;border-radius:8px;overflow:hidden;background:#111}
     .car-gallery-main{width:100%;aspect-ratio:16/10;object-fit:cover;display:block;cursor:zoom-in;transition:transform .3s}
     .car-gallery-main:hover{transform:scale(1.02)}
     .car-gallery-thumbs{display:flex;gap:.5rem;margin-top:.5rem;overflow-x:auto;padding-bottom:.5rem}
-    .car-gallery-thumbs img{width:80px;height:60px;object-fit:cover;border-radius:4px;cursor:pointer;opacity:.5;transition:opacity .2s,border-color .2s;border:2px solid transparent;flex-shrink:0}
+    .car-gallery-thumbs img{width:80px;height:60px;object-fit:cover;border-radius:2px;cursor:pointer;opacity:.5;transition:opacity .2s,border-color .2s,transform .15s;border:2px solid transparent;flex-shrink:0}
+    .car-gallery-thumbs img:active{transform:scale(.94)}
     .car-gallery-thumbs img.active,.car-gallery-thumbs img:hover{opacity:1;border-color:var(--ml)}
     .car-info{position:sticky;top:90px}
-    .car-info-card{background:var(--cr);border-radius:8px;padding:2rem}
+    .car-info-card{background-color:var(--cr);background-repeat:no-repeat;background-image:
+        radial-gradient(circle 3px at 14px 14px,rgba(0,0,0,.3) 0%,rgba(0,0,0,.3) 55%,rgba(255,255,255,.5) 62%,transparent 75%),
+        radial-gradient(circle 3px at calc(100% - 14px) 14px,rgba(0,0,0,.3) 0%,rgba(0,0,0,.3) 55%,rgba(255,255,255,.5) 62%,transparent 75%);
+      border-radius:3px;padding:2rem}
     .car-info h2{font-size:1.6rem;font-weight:800;text-transform:uppercase;margin-bottom:.25rem}
     .car-info-edition{font-size:.85rem;color:var(--ml);font-weight:700;text-transform:uppercase;letter-spacing:.08em;margin-bottom:1.5rem}
     .car-specs{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1.5rem}
-    .car-spec{background:var(--w);border:1px solid var(--gy);border-radius:6px;padding:1rem;text-align:center}
-    .car-spec-val{font-size:1.3rem;font-weight:800;color:var(--t1);display:block}
+    .car-spec{background:var(--w);border:1px solid var(--gy);border-radius:2px;padding:1rem;text-align:center;transition:transform .15s,box-shadow .2s}
+    .car-spec:hover{transform:translateY(1px);box-shadow:inset 0 2px 6px rgba(0,0,0,.08)}
+    .car-spec-val{font-family:var(--mono);font-size:1.2rem;font-weight:700;color:var(--t1);display:block}
     .car-spec-lbl{font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--t3);margin-top:.15rem;display:block}
-    .car-price-box{background:var(--m);border-radius:6px;padding:1.5rem;text-align:center;color:#fff;margin-bottom:1.5rem}
+    .car-price-box{background-color:var(--m);background-repeat:no-repeat;background-image:
+        radial-gradient(circle 3px at 14px 14px,rgba(0,0,0,.4) 0%,rgba(0,0,0,.4) 55%,rgba(255,255,255,.35) 62%,transparent 75%),
+        radial-gradient(circle 3px at calc(100% - 14px) 14px,rgba(0,0,0,.4) 0%,rgba(0,0,0,.4) 55%,rgba(255,255,255,.35) 62%,transparent 75%);
+      border-radius:3px;padding:1.5rem;text-align:center;color:#fff;margin-bottom:1.5rem}
     .car-price-box .price{font-size:2.5rem;font-weight:900;line-height:1}
     .car-price-box .price-note{font-size:.8rem;opacity:.6;margin-top:.25rem}
     .car-cta{display:flex;flex-direction:column;gap:.75rem}

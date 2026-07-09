@@ -85,7 +85,7 @@ if (track) {
   setInterval(() => moveCarousel(1), 5000);
 }
 
-/* 7. COUNTER ANIMATION */
+/* 7. COUNTER ANIMATION — synced with a gauge-dial SVG ring sweep */
 const counters = document.querySelectorAll('.hero-stat-num[data-target]');
 if (counters.length) {
   const counterObserver = new IntersectionObserver(entries => {
@@ -93,15 +93,19 @@ if (counters.length) {
       if (entry.isIntersecting) {
         const el = entry.target;
         const target = parseInt(el.dataset.target);
+        const ring = el.closest('.hero-stat')?.querySelector('.gauge-fill');
+        const circumference = ring ? ring.getTotalLength() : 0;
         let current = 0;
         const increment = target / 30;
         const timer = setInterval(() => {
           current += increment;
           if (current >= target) {
             el.textContent = target;
+            if (ring) ring.style.strokeDashoffset = 0;
             clearInterval(timer);
           } else {
             el.textContent = Math.floor(current);
+            if (ring) ring.style.strokeDashoffset = circumference * (1 - current / target);
           }
         }, 40);
         counterObserver.unobserve(el);
