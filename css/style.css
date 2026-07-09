@@ -76,6 +76,12 @@ ul{list-style:none}
 .hero{position:relative;min-height:100vh;display:flex;flex-direction:column;justify-content:center;padding:120px 1.5rem 0;overflow:hidden;background:#0a0a0a}
 .hero-bg{position:absolute;inset:0;z-index:0;background-size:cover;background-position:center}
 .hero-overlay{position:absolute;inset:0;z-index:1;background:linear-gradient(105deg,rgba(10,10,10,.95) 0%,rgba(10,10,10,.88) 35%,rgba(10,10,10,.5) 65%,rgba(10,10,10,.25) 100%)}
+.hero-overlay::before{content:'';position:absolute;inset:0;background:
+  repeating-linear-gradient(-45deg,transparent,transparent 3px,rgba(255,255,255,.015) 3px,rgba(255,255,255,.015) 4px),
+  repeating-linear-gradient(45deg,transparent,transparent 3px,rgba(255,255,255,.01) 3px,rgba(255,255,255,.01) 4px);pointer-events:none}
+.hero-overlay::after{content:'';position:absolute;inset:0;background:
+  radial-gradient(circle at 20% 80%,rgba(122,18,21,.08) 0%,transparent 50%),
+  radial-gradient(circle at 80% 20%,rgba(122,18,21,.05) 0%,transparent 40%);pointer-events:none}
 
 .hero-c{position:relative;z-index:2;max-width:800px;margin:0 auto;width:100%;text-align:center}
 .hero-tag{display:inline-block;font-family:'Oswald',sans-serif;font-size:.72rem;font-weight:600;text-transform:uppercase;letter-spacing:.22em;color:var(--ml);margin-bottom:1.5rem;padding:.5rem 1rem;border:1px solid rgba(196,30,36,.25);background:rgba(196,30,36,.06)}
@@ -115,12 +121,13 @@ ul{list-style:none}
 .sec-cr{background:var(--cr)}
 .sec-bl{background:var(--bl);color:var(--w);position:relative}
 .sec-bl::before{content:'';position:absolute;inset:0;background:
-  repeating-linear-gradient(45deg,transparent,transparent 40px,rgba(255,255,255,.008) 40px,rgba(255,255,255,.008) 42px);pointer-events:none}
+  repeating-linear-gradient(45deg,transparent,transparent 40px,rgba(255,255,255,.025) 40px,rgba(255,255,255,.025) 41px),
+  repeating-linear-gradient(-45deg,transparent,transparent 40px,rgba(255,255,255,.015) 40px,rgba(255,255,255,.015) 41px);pointer-events:none}
 .sec-garage{background:#111;color:var(--w);position:relative}
 .sec-garage::before{content:'';position:absolute;inset:0;background:
-  repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(255,255,255,.006) 2px,rgba(255,255,255,.006) 3px),
-  repeating-linear-gradient(90deg,transparent,transparent 2px,rgba(255,255,255,.004) 2px,rgba(255,255,255,.004) 3px);pointer-events:none}
-.sec-garage::after{content:'';position:absolute;inset:0;background:repeating-linear-gradient(135deg,transparent,transparent 50px,rgba(196,30,36,.006) 50px,rgba(196,30,36,.006) 52px);pointer-events:none}
+  repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(255,255,255,.025) 2px,rgba(255,255,255,.025) 3px),
+  repeating-linear-gradient(90deg,transparent,transparent 2px,rgba(255,255,255,.018) 2px,rgba(255,255,255,.018) 3px);pointer-events:none}
+.sec-garage::after{content:'';position:absolute;inset:0;background:repeating-linear-gradient(135deg,transparent,transparent 50px,rgba(196,30,36,.02) 50px,rgba(196,30,36,.02) 52px);pointer-events:none}
 .sec-in{max-width:1200px;margin:0 auto;position:relative}
 .sec-label{font-family:'Oswald',sans-serif;font-size:.72rem;font-weight:600;text-transform:uppercase;letter-spacing:.2em;color:var(--m);margin-bottom:.6rem;display:block}
 .sec-bl .sec-label,.sec-garage .sec-label{color:var(--ml)}
@@ -165,7 +172,8 @@ ul{list-style:none}
 /* ── PROMO ── */
 .promo{background:linear-gradient(135deg,var(--m) 0%,var(--md) 100%);border-radius:6px;padding:3.5rem 2rem;text-align:center;color:var(--w);position:relative;overflow:hidden;height:100%;display:flex;align-items:center;justify-content:center}
 .promo::before{content:'';position:absolute;inset:0;background:
-  repeating-linear-gradient(-45deg,transparent,transparent 20px,rgba(255,255,255,.012) 20px,rgba(255,255,255,.012) 40px)}
+  repeating-linear-gradient(-45deg,transparent,transparent 20px,rgba(255,255,255,.025) 20px,rgba(255,255,255,.025) 40px),
+  repeating-linear-gradient(45deg,transparent,transparent 20px,rgba(255,255,255,.015) 20px,rgba(255,255,255,.015) 40px)}
 .promo::after{content:'';position:absolute;top:-50%;right:-50%;width:100%;height:100%;background:radial-gradient(circle,rgba(255,255,255,.04) 0%,transparent 70%);pointer-events:none}
 .promo-c{position:relative;z-index:1}
 .promo-tag{display:inline-block;border:1px solid rgba(255,255,255,.3);color:var(--w);padding:.3rem 1rem;border-radius:50px;font-family:'Oswald',sans-serif;font-size:.65rem;font-weight:600;text-transform:uppercase;letter-spacing:.14em;margin-bottom:1rem}
@@ -201,7 +209,8 @@ ul{list-style:none}
 /* ── CTA ── */
 .cta{background:linear-gradient(135deg,var(--m) 0%,var(--md) 100%);text-align:center;padding:4.5rem 1.5rem;color:var(--w);position:relative;overflow:hidden}
 .cta::before{content:'';position:absolute;inset:0;background:
-  repeating-linear-gradient(-45deg,transparent,transparent 30px,rgba(255,255,255,.012) 30px,rgba(255,255,255,.012) 60px)}
+  repeating-linear-gradient(-45deg,transparent,transparent 20px,rgba(255,255,255,.025) 20px,rgba(255,255,255,.025) 40px),
+  repeating-linear-gradient(45deg,transparent,transparent 20px,rgba(255,255,255,.015) 20px,rgba(255,255,255,.015) 40px)}
 .cta h2{font-family:'Oswald',sans-serif;font-size:clamp(1.3rem,3vw,2rem);font-weight:700;text-transform:uppercase;margin-bottom:.5rem;position:relative}
 .cta p{opacity:.65;margin-bottom:1.5rem;font-size:.95rem;position:relative}
 .cta-tel{font-family:'Oswald',sans-serif;font-size:clamp(1.5rem,3vw,2.2rem);font-weight:700;color:var(--w);text-decoration:none;display:inline-block;margin-bottom:1.5rem;transition:transform .25s;position:relative}
@@ -219,8 +228,10 @@ ul{list-style:none}
 .faq-i.on .faq-a{max-height:200px}
 
 /* ── FOOTER ── */
-.ftr{background:var(--bl);color:var(--w);padding:4.5rem 1.5rem 1.5rem;position:relative}
+.ftr{background:var(--bl);color:var(--w);padding:4.5rem 1.5rem 1.5rem;position:relative;overflow:hidden}
 .ftr::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.06),transparent)}
+.ftr::after{content:'';position:absolute;inset:0;background:
+  repeating-linear-gradient(45deg,transparent,transparent 40px,rgba(255,255,255,.015) 40px,rgba(255,255,255,.015) 41px);pointer-events:none}
 .ftr-in{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1.8fr 1fr 1fr 1.5fr;gap:3rem}
 .ftr-brand img{height:60px;width:60px;border-radius:50%;object-fit:cover;margin-bottom:1rem;border:1px solid rgba(255,255,255,.08)}
 .ftr-brand p{font-size:.82rem;color:rgba(255,255,255,.35);line-height:1.65;max-width:260px}
@@ -237,7 +248,8 @@ ul{list-style:none}
 /* ── PAGE HERO ── */
 .pg-hero{background:linear-gradient(135deg,rgba(20,5,5,.88) 0%,rgba(122,18,21,.82) 40%,rgba(10,3,4,.92) 100%),url('../img/interior.png') center/cover no-repeat;padding:9rem 1.5rem 3.5rem;text-align:center;color:var(--w);position:relative}
 .pg-hero::before{content:'';position:absolute;inset:0;background:
-  repeating-linear-gradient(45deg,transparent,transparent 40px,rgba(255,255,255,.008) 40px,rgba(255,255,255,.008) 42px)}
+  repeating-linear-gradient(45deg,transparent,transparent 40px,rgba(255,255,255,.025) 40px,rgba(255,255,255,.025) 41px),
+  repeating-linear-gradient(-45deg,transparent,transparent 40px,rgba(255,255,255,.015) 40px,rgba(255,255,255,.015) 41px)}
 .pg-hero-c{position:relative;z-index:1}
 .pg-hero h1{font-family:'Oswald',sans-serif;font-size:clamp(2rem,4vw,3rem);font-weight:700;text-transform:uppercase}
 .pg-hero p{color:rgba(255,255,255,.55);margin-top:.5rem;font-size:1rem}
