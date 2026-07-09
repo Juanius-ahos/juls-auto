@@ -119,8 +119,10 @@ ul{list-style:none}
 /* ── SECTIONS ── */
 .sec{padding:5.5rem 1.5rem;position:relative}
 .sec::after{content:'';position:absolute;inset:0;background:
-  repeating-linear-gradient(45deg,transparent,transparent 40px,rgba(0,0,0,.012) 40px,rgba(0,0,0,.012) 41px),
-  repeating-linear-gradient(-45deg,transparent,transparent 40px,rgba(0,0,0,.008) 40px,rgba(0,0,0,.008) 41px);pointer-events:none}
+  repeating-linear-gradient(45deg,transparent,transparent 24px,rgba(0,0,0,.035) 24px,rgba(0,0,0,.035) 25px),
+  repeating-linear-gradient(-45deg,transparent,transparent 24px,rgba(0,0,0,.025) 24px,rgba(0,0,0,.025) 25px),
+  repeating-linear-gradient(0deg,transparent,transparent 48px,rgba(0,0,0,.015) 48px,rgba(0,0,0,.015) 49px),
+  repeating-linear-gradient(90deg,transparent,transparent 48px,rgba(0,0,0,.015) 48px,rgba(0,0,0,.015) 49px);pointer-events:none}
 .sec-cr{background:var(--cr)}
 .sec-bl{background:var(--bl);color:var(--w);position:relative}
 .sec-bl::before{content:'';position:absolute;inset:0;background:
