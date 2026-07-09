@@ -15,7 +15,7 @@ if (m && n) {
   n.querySelectorAll('a').forEach(a => a.addEventListener('click', () => n.classList.remove('open')));
 }
 
-/* 3. SCROLL REVEAL */
+/* 3. SCROLL REVEAL — text fades up (.reveal), headings stencil-wipe (.wipe-in), cards settle like a hung tag (.tag-in) */
 const io = new IntersectionObserver(entries => {
   entries.forEach(e => {
     if (e.isIntersecting) {
@@ -24,7 +24,7 @@ const io = new IntersectionObserver(entries => {
     }
   });
 }, { threshold: .15, rootMargin: '0px 0px -40px 0px' });
-document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+document.querySelectorAll('.reveal, .wipe-in, .tag-in').forEach(el => io.observe(el));
 
 /* 4. FAQ ACCORDION */
 document.querySelectorAll('.faq-q').forEach(b => {
