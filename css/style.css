@@ -57,7 +57,9 @@ ul{list-style:none}
 .area.tag-in:nth-child(n){transition-delay:calc(var(--i,0)*60ms)}
 
 /* ── HEADER ── */
-.hdr{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(10,10,10,.92);backdrop-filter:blur(16px) saturate(180%);border-bottom:1px solid rgba(255,255,255,.04);transition:all .4s cubic-bezier(.4,0,.2,1);overflow:hidden}
+.hdr{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(10,10,10,.92);backdrop-filter:blur(16px) saturate(180%);border-bottom:1px solid rgba(255,255,255,.04);transition:all .4s cubic-bezier(.4,0,.2,1)}
+/* No overflow:hidden here — backdrop-filter makes .hdr a containing block for position:fixed descendants (the mobile nav dropdown), and overflow:hidden would clip it to the header's own ~60px box, breaking the menu open state */
+.hdr-in{position:relative;z-index:1}
 .hdr::after{content:'';position:absolute;inset:0;pointer-events:none;background-image:
   linear-gradient(135deg,rgba(255,255,255,.035) 25%,transparent 25%),
   linear-gradient(225deg,rgba(255,255,255,.035) 25%,transparent 25%),
@@ -415,7 +417,7 @@ ul{list-style:none}
   .hdr-logo img{height:44px}
   .hdr-logo-name{font-size:.9rem}
   .hdr-logo-loc{font-size:.48rem}
-  .hdr-nav{position:fixed;top:60px;left:0;right:0;background:rgba(10,10,10,.98);backdrop-filter:blur(16px);flex-direction:column;padding:1.5rem;gap:1rem;transform:translateY(-100%);opacity:0;pointer-events:none;transition:.35s;border-bottom:1px solid rgba(255,255,255,.06)}
+  .hdr-nav{position:fixed;top:60px;left:0;right:0;background:#0d0d0d;flex-direction:column;padding:1.5rem;gap:1rem;transform:translateY(-100%);opacity:0;pointer-events:none;transition:.35s;border-bottom:1px solid rgba(255,255,255,.06);z-index:999}
   .hdr-nav.open{transform:translateY(0);opacity:1;pointer-events:all}
   .hdr-nav a{font-size:.88rem;padding:.5rem 0}
   .mob{display:block}
