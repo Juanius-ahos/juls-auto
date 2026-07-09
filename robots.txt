@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://julsauto.com/sitemap.xml

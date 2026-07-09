@@ -1,0 +1,12 @@
+.claude/
+*.zip
+*.svg
+8.png
+9.png
+extracted/
+test-logo.html
+WhatsApp Image*
+asset_*
+img/logo-dark.svg
+img/logo-white.svg
+img/logo-full.png
