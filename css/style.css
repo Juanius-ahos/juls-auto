@@ -411,6 +411,24 @@ ul{list-style:none}
 .garage-grid img{width:100%;height:100%;object-fit:cover;border-radius:6px;transition:transform .4s,filter .4s}
 .garage-grid img:hover{transform:scale(1.02);filter:brightness(1.1)}
 
+/* ── CARS FOR SALE WINDOW ── homepage teaser, styled like a showroom window with a taped sale sticker */
+.car-window{display:grid;grid-template-columns:1fr 1fr;border:1px solid var(--gy);border-radius:3px;overflow:hidden;background:var(--w)}
+.car-window-img{position:relative;min-height:280px;overflow:hidden}
+.car-window-img img{width:100%;height:100%;object-fit:cover;transition:transform .5s}
+.car-window:hover .car-window-img img{transform:scale(1.04)}
+.car-window-badge{position:absolute;top:18px;left:-8px;z-index:1;background:var(--ml);color:var(--w);padding:.4rem 1.2rem;font-family:'Oswald',sans-serif;font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.12em;transform:rotate(-6deg);box-shadow:0 4px 12px rgba(0,0,0,.35)}
+.car-window-info{padding:2.5rem;display:flex;flex-direction:column;justify-content:center;background-color:var(--w);background-repeat:no-repeat;background-image:
+    radial-gradient(circle 3px at 14px 14px,rgba(0,0,0,.34) 0%,rgba(0,0,0,.34) 55%,rgba(255,255,255,.55) 62%,transparent 75%),
+    radial-gradient(circle 3px at calc(100% - 14px) 14px,rgba(0,0,0,.34) 0%,rgba(0,0,0,.34) 55%,rgba(255,255,255,.55) 62%,transparent 75%)}
+.car-window-tag{font-family:var(--mono);font-size:.72rem;font-weight:700;color:var(--m);letter-spacing:.08em;text-transform:uppercase;margin-bottom:.3rem;display:block}
+.car-window-info h3{font-family:'Oswald',sans-serif;font-size:1.6rem;font-weight:800;text-transform:uppercase;margin-bottom:1.25rem;color:var(--t1)}
+.car-window-specs{display:flex;gap:1.5rem;margin-bottom:1.5rem}
+.car-window-specs>div{display:flex;flex-direction:column}
+.car-window-spec-val{font-family:var(--mono);font-size:1.15rem;font-weight:700;color:var(--t1)}
+.car-window-spec-lbl{font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--t3);margin-top:.1rem}
+.car-window-price{font-family:'Oswald',sans-serif;font-size:2.4rem;font-weight:800;color:var(--m);margin-bottom:1.5rem}
+.car-window-price small{font-size:.4em;font-weight:600;color:var(--t3);text-transform:uppercase;letter-spacing:.08em;margin-right:.4rem;vertical-align:middle}
+
 /* ── RESPONSIVE ── */
 @media(max-width:768px){
   .hdr-in{padding:0 1rem;height:60px}
@@ -434,6 +452,9 @@ ul{list-style:none}
   .gauge{width:64px;height:64px}
   .hero-stat-num{font-size:1.5rem}
   .garage-showcase{grid-template-columns:1fr}
+  .car-window{grid-template-columns:1fr}
+  .car-window-img{min-height:220px}
+  .car-window-info{padding:2rem}
   .abt-grid,.ct-grid,.abt-story,.svc-2col{grid-template-columns:1fr;gap:2rem}
   .safe-grid{grid-template-columns:1fr 1fr;gap:1rem}
   .ftr-in{grid-template-columns:1fr;gap:2rem}
@@ -489,6 +510,10 @@ ul{list-style:none}
   .abt-story h2{font-size:1.4rem}
   .abt-txt h3{font-size:1.2rem}
   .val{padding:2rem 1.25rem}
+  .car-window-info{padding:1.5rem}
+  .car-window-info h3{font-size:1.3rem}
+  .car-window-price{font-size:1.9rem}
+  .car-window-specs{gap:1rem}
   .val h3{font-size:.78rem}
   .carousel-track img{height:180px}
   .carousel-btn{width:32px;height:32px;font-size:.9rem}
