@@ -1,124 +1,100 @@
-/* ============================================
-   Jul's Auto Repair — main.js
-   ============================================ */
+/* Jul's Auto Repair — interactions */
+(function(){
+  'use strict';
+  var doc = document;
 
-/* 1. HEADER SCROLL EFFECT */
-const h = document.getElementById('hdr');
-window.addEventListener('scroll', () => {
-  h.classList.toggle('scrolled', scrollY > 50);
-});
+  /* Hero monument reveal on load */
+  window.addEventListener('load', function(){ doc.body.classList.add('ready'); });
+  // fallback if load already fired
+  if (doc.readyState === 'complete') doc.body.classList.add('ready');
 
-/* 2. MOBILE MENU */
-const m = document.getElementById('mob'), n = document.getElementById('nav');
-if (m && n) {
-  m.addEventListener('click', () => n.classList.toggle('open'));
-  n.querySelectorAll('a').forEach(a => a.addEventListener('click', () => n.classList.remove('open')));
-}
-
-/* 3. SCROLL REVEAL — text fades up (.reveal), headings stencil-wipe (.wipe-in), cards settle like a hung tag (.tag-in) */
-const io = new IntersectionObserver(entries => {
-  entries.forEach(e => {
-    if (e.isIntersecting) {
-      e.target.classList.add('in');
-      io.unobserve(e.target);
-    }
-  });
-}, { threshold: .15, rootMargin: '0px 0px -40px 0px' });
-document.querySelectorAll('.reveal, .wipe-in, .tag-in').forEach(el => io.observe(el));
-
-/* 4. FAQ ACCORDION */
-document.querySelectorAll('.faq-q').forEach(b => {
-  b.addEventListener('click', () => {
-    const i = b.parentElement, o = i.classList.contains('on');
-    document.querySelectorAll('.faq-i').forEach(x => x.classList.remove('on'));
-    if (!o) i.classList.add('on');
-  });
-});
-
-/* 5. CONTACT FORM (Web3Forms) */
-const f = document.getElementById('contactForm');
-if (f) f.addEventListener('submit', async e => {
-  e.preventDefault();
-  const t = e.target, b = t.querySelector('button[type=submit]'), o = b.textContent;
-  b.textContent = 'Sending...';
-  b.disabled = true;
-  try {
-    const r = await fetch(t.action, { method: 'POST', body: new FormData(t) });
-    const d = await r.json();
-    if (d.success)
-      t.innerHTML = '<div style="text-align:center;padding:3rem 1rem"><h3 style="font-size:1.3rem;font-weight:700;margin-bottom:.5rem;color:#7A1215">Message Sent!</h3><p style="color:#555">Thank you. We\'ll get back to you soon.</p></div>';
-    else throw 0;
-  } catch (e) {
-    b.textContent = 'Error — Try Again';
-    b.disabled = false;
-    setTimeout(() => b.textContent = o, 3000);
+  /* Header: solid after scroll */
+  var hdr = doc.getElementById('hdr');
+  var heroEl = doc.querySelector('.hero, .pghero');
+  function onScroll(){
+    if (!hdr) return;
+    var y = window.scrollY || window.pageYOffset;
+    if (y > 40) hdr.classList.add('solid'); else hdr.classList.remove('solid');
   }
-});
+  // sub-pages: header is over a short dark hero — switch to light once past it
+  window.addEventListener('scroll', onScroll, {passive:true});
+  onScroll();
 
-/* 6. CAROUSEL */
-const track = document.querySelector('.carousel-track');
-if (track) {
-  let currentSlide = 0;
-  const images = track.querySelectorAll('img');
-  const dotsContainer = document.getElementById('carouselDots');
-
-  images.forEach((_, i) => {
-    const dot = document.createElement('button');
-    dot.className = 'carousel-dot' + (i === 0 ? ' active' : '');
-    dot.onclick = () => goToSlide(i);
-    dotsContainer.appendChild(dot);
-  });
-
-  function goToSlide(n) {
-    currentSlide = n;
-    track.style.transform = `translateX(-${n * 100}%)`;
-    document.querySelectorAll('.carousel-dot').forEach((d, i) => d.classList.toggle('active', i === n));
-  }
-
-  window.moveCarousel = function (dir) {
-    let next = currentSlide + dir;
-    if (next < 0) next = images.length - 1;
-    if (next >= images.length) next = 0;
-    goToSlide(next);
-  };
-
-  setInterval(() => moveCarousel(1), 5000);
-}
-
-/* 7. COUNTER ANIMATION — synced with a gauge-dial SVG ring sweep */
-const counters = document.querySelectorAll('.hero-stat-num[data-target]');
-if (counters.length) {
-  const counterObserver = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        const el = entry.target;
-        const target = parseInt(el.dataset.target);
-        const ring = el.closest('.hero-stat')?.querySelector('.gauge-fill');
-        const circumference = ring ? ring.getTotalLength() : 0;
-        let current = 0;
-        const increment = target / 30;
-        const timer = setInterval(() => {
-          current += increment;
-          if (current >= target) {
-            el.textContent = target;
-            if (ring) ring.style.strokeDashoffset = 0;
-            clearInterval(timer);
-          } else {
-            el.textContent = Math.floor(current);
-            if (ring) ring.style.strokeDashoffset = circumference * (1 - current / target);
-          }
-        }, 40);
-        counterObserver.unobserve(el);
-      }
+  /* Mobile nav */
+  var burger = doc.getElementById('burger');
+  var mnav = doc.getElementById('mnav');
+  if (burger && mnav){
+    burger.addEventListener('click', function(){
+      mnav.classList.toggle('open');
+      doc.body.style.overflow = mnav.classList.contains('open') ? 'hidden' : '';
     });
-  }, { threshold: 0.5 });
-  counters.forEach(c => counterObserver.observe(c));
-}
-
-/* 8. PARALLAX EFFECT */
-window.addEventListener('scroll', () => {
-  const hero = document.querySelector('.hero-bg');
-  if (hero && scrollY < window.innerHeight) {
-    hero.style.transform = `translateY(${scrollY * 0.3}px)`;
+    mnav.querySelectorAll('a').forEach(function(a){
+      a.addEventListener('click', function(){ mnav.classList.remove('open'); doc.body.style.overflow=''; });
+    });
   }
-});
+
+  /* Reveal on scroll */
+  var revs = doc.querySelectorAll('.reveal');
+  if ('IntersectionObserver' in window && revs.length){
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){ if (e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+    }, {threshold:0.14, rootMargin:'0px 0px -8% 0px'});
+    revs.forEach(function(el){ io.observe(el); });
+  } else {
+    revs.forEach(function(el){ el.classList.add('in'); });
+  }
+
+  /* FAQ accordion */
+  doc.querySelectorAll('.faq-q').forEach(function(q){
+    q.addEventListener('click', function(){
+      var item = q.closest('.faq-i');
+      var ans = item.querySelector('.faq-a');
+      var open = item.classList.toggle('open');
+      ans.style.maxHeight = open ? ans.scrollHeight + 'px' : 0;
+      q.setAttribute('aria-expanded', open);
+    });
+  });
+
+  /* Services: hover/focus shows detail */
+  var sd = doc.getElementById('svcDetail');
+  if (sd){
+    var sdName = sd.querySelector('.sd-name');
+    var sdDesc = sd.querySelector('.sd-desc');
+    doc.querySelectorAll('.svc-list button').forEach(function(b){
+      function show(){
+        doc.querySelectorAll('.svc-list button').forEach(function(x){x.classList.remove('on');});
+        b.classList.add('on');
+        sdName.textContent = b.dataset.name || b.textContent;
+        sdDesc.textContent = b.dataset.desc || '';
+      }
+      b.addEventListener('mouseenter', show);
+      b.addEventListener('focus', show);
+      b.addEventListener('click', show);
+    });
+  }
+
+  /* Live "Open now" status from hours: Mon–Fri 7–17, Sat 8–14 */
+  (function(){
+    var el = doc.getElementById('openStatus');
+    if (!el) return;
+    var now = new Date();
+    var day = now.getDay();            // 0 Sun .. 6 Sat
+    var mins = now.getHours()*60 + now.getMinutes();
+    var open=false, closeTxt='', nextTxt='';
+    if (day>=1 && day<=5){ if (mins>=420 && mins<1020){ open=true; closeTxt='Closes 5 PM'; } }
+    else if (day===6){ if (mins>=480 && mins<840){ open=true; closeTxt='Closes 2 PM'; } }
+    if (!open){
+      if (day===6 && mins>=840) nextTxt='Opens Mon 7 AM';
+      else if (day===0) nextTxt='Opens Mon 7 AM';
+      else if (day>=1 && day<=5 && mins>=1020) nextTxt = (day===5) ? 'Opens Sat 8 AM' : 'Opens 7 AM tomorrow';
+      else if (day===6) nextTxt='Opens 8 AM';
+      else nextTxt='Opens 7 AM';
+    }
+    var label = doc.getElementById('openLabel');
+    if (open){ el.classList.remove('closed'); if(label) label.textContent='Open now'; var c=doc.getElementById('openSub'); if(c) c.textContent=closeTxt; }
+    else { el.classList.add('closed'); if(label) label.textContent='Closed'; var s=doc.getElementById('openSub'); if(s) s.textContent=nextTxt; }
+  })();
+
+  /* Current year */
+  var yr = doc.getElementById('yr'); if (yr) yr.textContent = new Date().getFullYear();
+})();
