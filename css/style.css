@@ -251,6 +251,8 @@ h1,h2,h3,h4{font-family:'Archivo',system-ui,sans-serif;font-weight:800;line-heig
 .ftr-btm{border-top:1px solid rgba(255,255,255,.08)}
 .ftr-btm-in{max-width:var(--maxw);margin:0 auto;padding:1.5rem var(--pad);display:flex;justify-content:space-between;
   flex-wrap:wrap;gap:1rem;color:var(--on-dark-mut);font-size:.88rem}
+.ftr-credits{display:flex;flex-wrap:wrap;gap:1.6rem}
+.ftr-credits a{color:var(--on-dark-mut)}
 .ftr-btm a:hover{color:#fff}
 
 /* ── SUB-PAGE HERO ──────────────────────────────────── */
